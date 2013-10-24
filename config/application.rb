@@ -23,7 +23,6 @@ module MeYodaApp
     # Disable test_unit generation, assets and test_helpers
     config.generators do |g|
           g.test_framework false
-          g.assets false
     end
   end
 end

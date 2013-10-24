@@ -1,0 +1,27 @@
+<%= form_for :card_type, url: card_types_path do |f| %>
+	
+	<% if @card_type.errors.any? %>
+		<div id="errorExplanation">
+			<h2><%= pluralize(@card_type.errors.count, "error") %> impiden guardar la carta</h2>
+			<ul>
+				<% @card_type.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<%end %>
+			</ul>
+		</div>
+	<% end %>
+
+	<p>
+		<%= f.label :name %><br />
+		<%= f.text_field :name %><br />
+	</p>
+
+	<p>
+		<%= f.label :edition %><br />
+		<%= f.text_field :edition %><br />
+	</p>
+
+	<p>
+		<%= f.submit %>
+	</p>
+<% end %>
