@@ -1,15 +1,28 @@
 MeYodaApp::Application.routes.draw do
-  resources :cards
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  #Resources
-  resources :card_types
-
   # Root
   root to: "welcome#index"
+  
+  #Resources
+  resources :card_types
+  resources :cards
+  resources :users
+  
+  # Users sessions control routes
+  match "signup" => "users#new", via: :get
+  match "login" => "sessions#login", via: :get
+  match "logout" => "sessions#logout", via: :get
+  match "home" => "sessions#home", via: :get
+  match "profile" => "sessions#profile", via: [:get, :post]
+  match "setting" => "sessions#setting", via: [:get, :post]
 
+  # Authentication (http://www.sitepoint.com/rails-userpassword-authentication-from-scratch-part-i/)
+  get ':controller(/:action(/:id))'   # This is used for login_attempt in sessions controller
+  post ':controller(/:action(/:id))'
+  
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

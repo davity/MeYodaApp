@@ -11,11 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022113534) do
+ActiveRecord::Schema.define(version: 20131024083708) do
 
   create_table "card_types", force: true do |t|
     t.string   "name"
     t.string   "edition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "cards", force: true do |t|
+    t.integer  "code"
+    t.integer  "CardType_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cards", ["CardType_id"], name: "index_cards_on_CardType_id"
+
+  create_table "users", force: true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "encrypted_password"
+    t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
