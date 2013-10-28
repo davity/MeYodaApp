@@ -1,9 +1,12 @@
 <p>
+	<strong>ID:</strong> <%= @card_type.id %>
+</p>
+<p>
 	<strong>Nombre:</strong> <%= @card_type.name %>
 </p>
-
 <p>
 	<strong>Edición:</strong> <%= @card_type.edition %>
 </p>
 
-<%= link_to 'Continuar', card_types_path %>
+<%= link_to 'Editar', edit_card_type_path(@card_type) %> |
+<%= link_to 'Atras', card_types_path %>
