@@ -1,14 +1,43 @@
+<<<<<<< HEAD
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Code:</strong>
   <%= @card.code %>
+=======
+<p>
+  <strong>ID:</strong>
+  <%= @card.id %>
+>>>>>>> 204073be7cfe6a58469c6377091f9a1e2a7f478d
 </p>
 
 <p>
   <strong>Cardtype:</strong>
+<<<<<<< HEAD
   <%= @card.CardType %>
 </p>
 
 <%= link_to 'Edit', edit_card_path(@card) %> |
 <%= link_to 'Back', cards_path %>
+=======
+  <%= @card.card_type.id %>
+</p>
+
+<p>
+  <strong>Consulta:</strong>
+  <%= 	card_type = CardType.new
+		
+		if (card_type = CardType.find_by(:name => 'Yoda', :edition => 'StarWars')) != nil
+			card_type.id
+		else
+			'nil'
+		end
+  		%>
+</p>
+<p>
+  <%= @card.card_type.id %>
+</p>
+
+<%= link_to 'Editar', edit_card_path(@card) %> |
+<%= link_to 'Atras', cards_path %>
+>>>>>>> 204073be7cfe6a58469c6377091f9a1e2a7f478d

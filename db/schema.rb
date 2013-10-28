@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20131028095622) do
+=======
+ActiveRecord::Schema.define(version: 20131028094621) do
+>>>>>>> 204073be7cfe6a58469c6377091f9a1e2a7f478d
 
   create_table "card_types", force: true do |t|
     t.string   "name"
@@ -21,12 +25,17 @@ ActiveRecord::Schema.define(version: 20131028095622) do
   end
 
   create_table "cards", force: true do |t|
+<<<<<<< HEAD
     t.integer  "code"
     t.integer  "CardType_id"
+=======
+    t.integer  "card_type_id"
+>>>>>>> 204073be7cfe6a58469c6377091f9a1e2a7f478d
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   add_index "cards", ["CardType_id"], name: "index_cards_on_CardType_id"
 
   create_table "sales", force: true do |t|
@@ -34,6 +43,9 @@ ActiveRecord::Schema.define(version: 20131028095622) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+=======
+  add_index "cards", ["card_type_id"], name: "index_cards_on_card_type_id"
+>>>>>>> 204073be7cfe6a58469c6377091f9a1e2a7f478d
 
   create_table "users", force: true do |t|
     t.string   "username"
