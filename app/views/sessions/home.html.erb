@@ -1,0 +1,9 @@
+<h1>Sessions#home</h1>
+<p>Find me in app/views/sessions/home.html.erb</p>
+<h2 class='User_Header'><%=@current_user.username%> Home </h2>
+
+<% flash.each do |name, notice| -%>
+  <%= content_tag :div, notice, class: name %>
+<% end -%>
+
+<%= button_to('Log Out', logout_path, method: "get") %>

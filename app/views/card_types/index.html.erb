@@ -1,0 +1,24 @@
+<h1>Tipos de cartas</h1>
+<%= link_to 'Añadir', new_card_type_path %><br /><br />
+
+<table>
+	<tr>
+		<th>Nombre</th>
+		<th>Edición</th>
+		<th></th>
+	    <th></th>
+	    <th></th>
+	</tr>
+
+	<% @card_types.each do |ctype| %>
+	<tr>
+		<td><%= ctype.name %></td>
+		<td><%= ctype.edition %></td>
+		<td><%= link_to 'Ver', card_type_path(ctype) %></td>
+		<td><%= link_to 'Editar', edit_card_type_path(ctype) %></td>
+		<td><%= link_to 'Borrar', card_type_path(ctype), method: :delete, data: {confirm: '¿Estás seguro?' } %></td>
+	</tr>
+	<% end %>
+</table>
+<br />
+<%= link_to 'Inicio', controller: "welcome" %>

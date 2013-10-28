@@ -1,0 +1,27 @@
+<h1> Mis Cartas a la Venta </h1>
+
+<%= link_to "Nueva Carta a la Venta", new_sale_path %>
+
+<table>
+	<tr>
+	<th>Carta |</th> 
+	<th>Precio Inicial </th>
+	</tr>
+
+ 	<% @sale.each do |sale| %>
+    		<tr>
+		<td></td>
+     		<td><%= sale.starting_price %> € </td>
+       		<td><%= link_to "Show", sale_path(sale) %></td>
+    		<td><%= link_to "Edit", edit_sale_path(sale) %></td>
+     		<td><%= link_to 'Destroy',sale_path(sale),
+                               method: :delete, 
+                               data:{confirm:'Are you sure?'}%>	
+                               </td>
+    		</tr>
+ 	<% end %>
+
+
+
+</table>
+

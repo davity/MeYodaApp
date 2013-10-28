@@ -1,0 +1,9 @@
+
+<p>
+	<strong> Precio de Salida: </strong>
+	<%= @sale.starting_price %>
+</p>
+
+
+<%= link_to "Volver a Mis Cartas a la Venta", sales_path %> |
+<%= link_to "Editar Carta", edit_sale_path %>
