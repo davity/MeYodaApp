@@ -18,6 +18,7 @@ MeYodaApp::Application.routes.draw do
   match "home" => "sessions#home", via: :get
   match "profile" => "sessions#profile", via: [:get, :post]
   match "setting" => "sessions#setting", via: [:get, :post]
+  
 
   # Authentication (http://www.sitepoint.com/rails-userpassword-authentication-from-scratch-part-i/)
   get ':controller(/:action(/:id))'   # This is used for login_attempt in sessions controller

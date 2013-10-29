@@ -5,18 +5,20 @@ class ApplicationController < ActionController::Base
   
   protected
   def authenticate_user
-    if session[:user_id]
-    # set current user object to @current_user object variable
+    # if there is a session key and the users id exists in the database we are autenticated
+    if (session[:user_id] && not(User.where(id: session[:user_id]).blank?))
       @current_user = User.find session[:user_id]
-      return true	
+      return true
     else
+    # if not, we are redirected to autenticate
       redirect_to(:controller => 'sessions', :action => 'login')
       return false
     end
   end
   
   def save_login_state
-    if session[:user_id]
+    # if we are autenticated we are redirected to our home
+    if session[:user_id] && not(User.where(id: session[:user_id]).blank?)
       redirect_to(:controller => 'sessions', :action => 'home')
       return false
     else

@@ -2,4 +2,4 @@
 <p>Gracias por confiar en nosotros para la compraventa de cartas de Star Wars</p>
 <%= link_to 'Tipos de cartas' , controller: "card_types" %>
 <%= button_to('Users', users_path, method: "get") %>
-<%= button_to('Log In', login_path, method: "get") %>
+<%= render "sessions/log" %>
