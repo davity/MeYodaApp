@@ -4,7 +4,6 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Cardtype</th>
       <th>Nombre</th>
       <th>Edición</th>
       <th></th>
@@ -18,7 +17,8 @@
     <% @cards.each do |card| %>
       <tr>
         <td><%= card.id %></td>
-        <td><%= card.card_type.id %></td>
+        <td><%= card.card_type.name %></td>
+        <td><%= card.card_type.edition %></td>
         <td><%= link_to 'Ver', card %></td>
         <td><%= link_to 'Modificar', edit_card_path(card) %></td>
         <td><%= link_to 'Eliminar', card, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>

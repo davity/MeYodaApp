@@ -1,6 +1,6 @@
 <h1>¡Bienvenido a MeYoda!</h1>
 <p>Gracias por confiar en nosotros para la compraventa de cartas de Star Wars</p>
-<p><%= link_to 'Tipos de cartas' , controller: "card_types" %></p>
-<p><%= link_to 'Cartas' , controller: "cards" %></p>
+<p><%= link_to 'Tipos de cartas' , card_types_path %></p>
+<p><%= link_to 'Cartas' , cards_path %></p>
 <%= button_to('Users', users_path, method: "get") %>
 <%= button_to('Log In', login_path, method: "get") %>

@@ -10,15 +10,13 @@ class CardsController < ApplicationController
 
 	def new
 		@card = Card.new
-	end
-
-	def edit
-		@card = Card.find(params[:id])
+		@card_type = CardType.new
+		@card_types = CardType.all
 	end
 
 	def create
-		@card = Card.new(card_params)
-		@card.card_type.id = CardType.where(:name => @card.card_type_name, :edition => @card.card_type_edition)
+		@card_type = CardType.find_by(params[:card][:card_types])
+		@card = @card_type.cards.create()
 
 		if @card.save
 			redirect_to @card
@@ -27,14 +25,19 @@ class CardsController < ApplicationController
 		end
 	end
 
+	def edit
+		@card = Card.find(params[:id])
+		@card_type = @card.card_type
+	end
+
 	def update
 		@card = Card.find(params[:id])
 
 		if @card.update(card_params)
 		  redirect_to @card
 		else
-      render action: 'edit'
-  	end
+	      render action: 'edit'
+	  	end
 	end
 
 	def destroy
@@ -46,6 +49,6 @@ class CardsController < ApplicationController
 
 	private
 		def card_params
-		  params.require(:card).permit(:code, :CardType_id)
+		  params.require(:card).permit(:name, :edition)
     	end
-	end
+end

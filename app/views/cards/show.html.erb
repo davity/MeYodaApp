@@ -1,26 +1,21 @@
 <p>
-  <strong>ID:</strong>
+  <strong>ID: </strong>
   <%= @card.id %>
 </p>
 
 <p>
-  <strong>Cardtype:</strong>
+  <strong>card_type_id: </strong>
   <%= @card.card_type.id %>
 </p>
 
 <p>
-  <strong>Consulta:</strong>
-  <%= 	card_type = CardType.new
-		
-		if (card_type = CardType.find_by(:name => 'Yoda', :edition => 'StarWars')) != nil
-			card_type.id
-		else
-			'nil'
-		end
-  		%>
+  <strong>Nombre: </strong>
+  <%= @card.card_type.name %>
 </p>
+
 <p>
-  <%= @card.card_type.id %>
+  <strong>Edición: </strong>
+  <%= @card.card_type.edition %>
 </p>
 
 <%= link_to 'Editar', edit_card_path(@card) %> |
