@@ -1,5 +1,4 @@
 class CardsController < ApplicationController
-
 	def index
 		@cards = Card.all
 	end
@@ -45,4 +44,3 @@ class CardsController < ApplicationController
 		  params.require(:card).permit(:name, :edition)
     	end
 end
-
