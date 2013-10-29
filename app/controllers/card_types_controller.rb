@@ -26,9 +26,9 @@ class CardTypesController < ApplicationController
 	end
 
 	def update
-		@card_type = CardType.new(card_type_params)
+		@card_type = CardType.find(params[:id])
 
-		if @card_type.save
+		if @card_type.update(params[:card_type].permit(:name, :edition))
 			redirect_to @card_type
 		else
 			render 'edit'

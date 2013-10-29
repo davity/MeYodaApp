@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Code:</strong>
-  <%= @card.code %>
+  <strong>ID: </strong>
+  <%= @card.id %>
+</p>
+<p>
+  <strong>Nombre: </strong>
+  <%= @card.card_type.name %>
 </p>
 
 <p>
-  <strong>Cardtype:</strong>
-  <%= @card.CardType %>
+  <strong>Edición: </strong>
+  <%= @card.card_type.edition %>
 </p>
 
-<%= link_to 'Edit', edit_card_path(@card) %> |
-<%= link_to 'Back', cards_path %>
+<!-- ROTO - Arreglar en controlador <%= link_to 'Editar', edit_card_path(@card) %> |-->
+<%= link_to 'Atras', cards_path %>

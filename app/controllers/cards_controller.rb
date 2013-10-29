@@ -1,52 +1,60 @@
 class CardsController < ApplicationController
-  before_action :set_card, only: [:show, :edit, :update, :destroy]
+	def index
+		@cards = Card.all
+	end
 
-  def index
-    @cards = Card.all
-  end
+	def show
+		@card = Card.find(params[:id])
+	end
 
-  def show
-  end
+	def new
+		@card = Card.new
+		@card_type = CardType.new
+		@card_types = CardType.all
+	end
 
-  def new
-    @card = Card.new
-  end
+	def create
+		@card_type = CardType.find_by(:name => params[:card][:card_types][:name])
+		@card = @card_type.cards.create()
 
-  def edit
-  end
+		if @card.save
+			redirect_to @card
+		else
+			render action: 'new'
+		end
+	end
 
-  def create
-    @card = Card.new(card_params)
+	def edit
+		@card = Card.find(params[:id])
+		@card_types = CardType.all
+	end
 
-    if @card.save
-      redirect_to @card
-    else
-      render action: 'new'
-    end
-  end
+	# ROTO - Arreglar
+	def update
 
-  def update
-    if @card.update(card_params)
-      redirect_to @card
-    else
-      render action: 'edit'
-    end
-  end
+		@card = Card.find(params[:id])
+		@card_type = @card.card_type
+		@card_type.delete_if{ |c| c.id == @card.id }
 
-  def destroy
-    @card.destroy
-    
-    redirect_to cards_url }
-  end
+		@card_type = CardType.find_by(:name => params[:card][:card_types][:name])
+		@card_type << @card
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_card
-      @card = Card.find(params[:id])
-    end
+		if @card.update(@card)
+		  redirect_to @card
+		else
+	      render action: 'edit'
+	  	end
+	end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def card_params
-      params.require(:card).permit(:code, :CardType_id)
-    end
+	def destroy
+		@card = Card.find(params[:id])
+		@card.destroy
+
+		redirect_to cards_path
+	end
+
+	private
+		def card_params
+		  params.require(:card).permit(:name, :edition)
+    	end
 end

@@ -1,6 +1,6 @@
-<%= form_for(@card) do |f| %>
+<%= form_for @card do |f| %>
   <% if @card.errors.any? %>
-    <div id="error_explanation">
+    <p>
       <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
 
       <ul>
@@ -8,18 +8,16 @@
         <li><%= msg %></li>
       <% end %>
       </ul>
-    </div>
+    </p>
   <% end %>
 
-  <div class="field">
-    <%= f.label :code %><br>
-    <%= f.number_field :code %>
-  </div>
-  <div class="field">
-    <%= f.label :CardType %><br>
-    <%= f.text_field :CardType %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.fields_for :card_types do |fu| %>
+    <p>
+      <%= fu.label :name %><br>
+      <%= fu.select :name, @card_types.map { |t| [t.name, t.name]} %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+  <% end %>
 <% end %>

@@ -1,3 +1,3 @@
 class Card < ActiveRecord::Base
-  belongs_to :CardType
+	belongs_to :card_type
 end
