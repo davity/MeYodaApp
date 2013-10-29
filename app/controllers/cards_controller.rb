@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-	
+
 	def index
 		@cards = Card.all
 	end
@@ -40,15 +40,9 @@ class CardsController < ApplicationController
 	  	end
 	end
 
-	def destroy
-    @card = Card.find(params[:id])
-		@card.destroy
-
-	 redirect_to cards_url
-	end
-
 	private
 		def card_params
 		  params.require(:card).permit(:name, :edition)
     	end
 end
+
