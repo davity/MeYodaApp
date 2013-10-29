@@ -10,10 +10,8 @@ MeYodaApp::Application.routes.draw do
   resources :card_types
   resources :cards
   resources :users
-<<<<<<< HEAD
   resources :sales
-=======
->>>>>>> 204073be7cfe6a58469c6377091f9a1e2a7f478d
+
   
   # Users sessions control routes
   match "signup" => "users#new", via: :get
