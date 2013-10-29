@@ -15,7 +15,7 @@ class CardsController < ApplicationController
 	end
 
 	def create
-		@card_type = CardType.find_by(params[:card][:card_types])
+		@card_type = CardType.find_by(:name => params[:card][:card_types][:name])
 		@card = @card_type.cards.create()
 
 		if @card.save

@@ -17,10 +17,6 @@
       <%= fu.select :name, @card_types.map { |t| [t.name, t.name]} %>
     </p>
     <p>
-      <%= fu.label :edition %><br>
-      <%= fu.select :edition, @card_types.map { |t| [t.edition, t.edition]} %>
-    </p>
-    <p>
       <%= f.submit %>
     </p>
   <% end %>
