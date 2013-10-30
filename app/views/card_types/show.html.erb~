@@ -7,7 +7,7 @@
 </p>
 
 <p>
-	<strong>Foto:</strong> <%= image_tag "#{@card_type.photo_dir}" %>
+	<strong>Foto:</strong> <%= image_tag "#{.photo_dir}" %>
 </p>
 
 <%= link_to 'Editar', edit_card_type_path(@card_type) %> |

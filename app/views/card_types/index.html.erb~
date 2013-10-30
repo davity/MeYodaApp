@@ -18,6 +18,19 @@
 		<td><%= link_to 'Ver', card_type_path(ctype) %></td>
 		<td><%= link_to 'Editar', edit_card_type_path(ctype) %></td>
 		<td><%= link_to 'Borrar', card_type_path(ctype), method: :delete, data: {confirm: '¿Estás seguro?' } %></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+
+
+
+
+
 	</tr>
 	<% end %>
 </table>
