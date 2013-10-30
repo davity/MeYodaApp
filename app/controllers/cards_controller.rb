@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+  before_filter :authenticate_user, :only => [:new, :create]
+  
 	def index
 		@cards = Card.all
 	end
@@ -16,7 +18,7 @@ class CardsController < ApplicationController
 	def create
 		@card_type = CardType.find_by(:name => params[:card][:card_types][:name])
 		@card = @card_type.cards.create()
-
+    @card.user_id = @current_user.id
 		if @card.save
 			redirect_to @card
 		else
@@ -50,7 +52,7 @@ class CardsController < ApplicationController
 		@card = Card.find(params[:id])
 		@card.destroy
 
-		redirect_to cards_path
+		redirect_to home_path
 	end
 
 	private

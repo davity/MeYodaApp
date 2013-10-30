@@ -6,7 +6,8 @@
 <%= button_to 'Cartas' , cards_path, method: :get, :class => "btn span2" %>
 <%= button_to 'Ventas' , sales_path, method: :get, :class => "btn span2" %>
 <%= button_to 'Users', users_path, method: "get", :class => "btn btn-primary span2" %>
-<%= render "sessions/log" %>
+<%= render "sessions/logger" %>
+<%= link_to "See all selling cards", sales_path %>
 <% if session[:user_id] %>
 	<%= button_to 'Home', home_path, method: :get %>
 <% end %>

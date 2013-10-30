@@ -32,12 +32,39 @@
     <% end %>
     <tr><th><%= f.submit :Update %></th><th></th></tr>
   <% end %>
+</table></br>
 
-
-
-    
+<%= button_to('Add Card', new_card_path, method: "get") %>
+<table>
+  <tr>
+  <% if @user.cards.any? %>
+    <th>Cards owned</th>
+    </tr>
+    <tr>
+    <% @user.cards.each do |card| %>
+      <th>
+        Card name: <%= card.card_type.name %></br>
+        Edition: <%= card.card_type.edition %></br>
+        Creation date: <%= card.card_type.created_at %></br>
+        
+        <% if card.sale %>
+          Price: <%= card.sale.starting_price %> 
+          <%= link_to "Edit", edit_sale_path(card.sale.id) %>
+          <%= link_to 'Destroy',sale_path(card.sale.id),
+                               method: :delete,
+                               data:{confirm:'Are you sure?'}%>	
+        <% else %>
+          <%= link_to 'Set price', new_sale_path(card) %>
+        <% end %></br>
+        <%= link_to 'Remove', card, method: :delete, data: { confirm: '¿Estás seguro?' } %>
+      </th>
+    <% end %>
+  <% else %>
+    You have no cards
+  <% end %>
+  </tr>
+</table></br>
 
  <tr><th><%= button_to('Log Out', logout_path, method: "get") %></th><th></th></tr>
- <tr><th><%= button_to('Atras', root_path, method: "get") %></th><th></th></tr>
+ <tr><th><%= button_to('Index', root_path, method: "get") %></th><th></th></tr>
 
-</table>

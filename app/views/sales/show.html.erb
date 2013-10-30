@@ -7,7 +7,7 @@
 
 <div class="row-fluid">
 	<div class="span1">
-		<strong>Precio: </strong>
+		<strong>Precio de salida: </strong>
 	</div>
 	<div class="span3">
  		<%= @sale.starting_price %> €
@@ -22,3 +22,8 @@
 		<%= link_to "Editar", edit_sale_path, :class => "btn btn-warning" %>
 	</div>  
 </div>
+
+
+<%= link_to "Edit price", edit_sale_path %>
+<%= link_to "See all selling cards", sales_path %>
+<%= link_to "Home", home_path %>

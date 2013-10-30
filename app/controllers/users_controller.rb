@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   #include AccountsController
-  before_filter :save_login_state, :only => [:new, :create]
+  before_filter :save_login_state, :only => [:new, :create,:index]
   before_filter :authenticate_user, :only => [:update]
   
   def index

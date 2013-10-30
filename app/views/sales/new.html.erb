@@ -1,9 +1,40 @@
-<h2>Vender nueva carta</h2>
-<br />
-<div class="row-fluid">
-	<div class="span9">
-		<%= render 'form' %>
-	</div>
-</div>
-<br />
+<<<<<<< HEAD
+<h1>Vender una nueva carta</h1>
+
+<h2>Introduce el Precio Inicial de tu carta:</h2>
+
+<%= form_for @sale, :url =>sales_path(@sale, :card_id => @card.id) do |f| %>
+  
+  <% if @sale.errors.any? %>
+  	<div id="errorExplanation">
+      	<h2><%= pluralize(@sale.errors.count, "error") %> 
+  	prohibited this post from being saved:</h2>
+      
+  	<ul>
+  	<% @sale.errors.full_messages.each do |msg| %>
+        		<li><%= msg %></li>
+      	<% end %>
+      	</ul>
+  	</div>
+  <% end %>
+
+
+  <div class="control-group">
+    <%= f.label :starting_price, :class => "control-label" %>
+    <div class="controls">
+      <div class="input-append">
+        <%= f.number_field :starting_price, :type => "number" %>
+        <span class="add-on">€</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit :class => "btn btn-success" %>
+    </div>
+  </div>
+<% end %>
+
 <%= link_to 'Atras', sales_path, :class => "btn" %>
+<%= link_to 'Inicio', root_path, :class => "btn" %>

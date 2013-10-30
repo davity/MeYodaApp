@@ -1,9 +1,45 @@
 <h2> Edita tu Carta </h2>
 
-<%= render "form" %>
+<%= form_for @sale do |f| %>
+  
+  <% if @sale.errors.any? %>
+  	<div id="errorExplanation">
+    	<h2><%= pluralize(@sale.errors.count, "error") %> prohibited this post from being saved:</h2>
+    	<ul>
+    	<% @sale.errors.full_messages.each do |msg| %>
+    		<li><%= msg %></li>
+    	<% end %>
+    	</ul>
+  	</div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :starting_price, :class => "control-label" %>
+    <div class="controls">
+      <div class="input-append">
+        <%= f.number_field :starting_price, :type => "number" %>
+        <span class="add-on">€</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit :class => "btn btn-success" %>
+    </div>
+  </div>
+  
+<% end %>
 
 <div class="row-fluid">
-	<div class="span1">
-		<%= link_to 'Atras', sales_path, :class => "btn" %>
-	</div>
+  <div class="span1">
+    <%= link_to 'Atras', sales_path, :class => "btn" %>
+  </div>
+  <div class="span2">
+    <%= link_to "Seelling cards", sales_path %>
+  </div>
+  <div class="span1">
+    <%= link_to "Home", home_path %>
+  </div>
 </div>
+

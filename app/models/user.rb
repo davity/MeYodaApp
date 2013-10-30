@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :account, dependent: :destroy
+  has_many :cards, dependent: :destroy
   attr_accessor :password
   
   before_save :encrypt_password

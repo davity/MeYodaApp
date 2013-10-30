@@ -4,8 +4,8 @@
     <tr>
       <th>Username</th>
       <th>Email</th>
-      <th></th>
-      <th></th>
+      <th>Account number</th>
+      <th>Account balance</th>
       <th></th>
     </tr>
   </thead>
@@ -28,6 +28,6 @@
 
 <br>
 
-<%= render "sessions/log" %>
+<%= render "sessions/logger" %>
 <%= button_to('New User', new_user_path, method: "get") %>
 <%= button_to('Atras', root_path, method: "get") %>
