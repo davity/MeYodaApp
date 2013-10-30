@@ -1,16 +1,29 @@
-<p>
-  <strong>ID: </strong>
-  <%= @card.id %>
-</p>
-<p>
-  <strong>Nombre: </strong>
-  <%= @card.card_type.name %>
-</p>
-
-<p>
-  <strong>Edición: </strong>
-  <%= @card.card_type.edition %>
-</p>
-
-<!-- ROTO - Arreglar en controlador <%= link_to 'Editar', edit_card_path(@card) %> |-->
-<%= link_to 'Atras', cards_path %>
+<div class="row">
+	<div class="span2">
+		<h4>Carta <%= @card.id %></h4>
+		<br />
+	</div>
+</div>
+<div class="row">
+	<div class="span1">
+		<strong>Nombre: </strong>
+	</div>
+	<div class="span3">
+ 		<%= @card.card_type.name %>
+	</div>
+</div>
+<div class="row">
+	<div class="span1">
+		<strong>Edición: </strong>
+	</div>
+	<div class="span3">
+ 		<%= @card.card_type.edition %>
+	</div>
+</div>
+<div class="row">
+	<div class="span1">
+		<br />
+		<br />
+		<%= link_to 'Atras', cards_path, :class => "btn" %>
+	</div>
+</div>

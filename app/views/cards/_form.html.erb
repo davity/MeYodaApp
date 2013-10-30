@@ -12,12 +12,17 @@
   <% end %>
 
   <%= f.fields_for :card_types do |fu| %>
-    <p>
-      <%= fu.label :name %><br>
-      <%= fu.select :name, @card_types.map { |t| [t.name, t.name]} %>
-    </p>
-    <p>
-      <%= f.submit %>
-    </p>
+    <div class="control-group">
+      <%= fu.label :name, :class => "control-label" %>
+      <div class="controls">
+        <%= fu.select :name, @card_types.map { |t| [t.name, t.name]} %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit :class => "btn" %>
+      </div>
+    </div>
+      
   <% end %>
 <% end %>

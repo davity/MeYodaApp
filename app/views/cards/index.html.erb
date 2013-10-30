@@ -1,33 +1,38 @@
-<h1>Listado de cartas</h1>
+<h2>Listado de cartas</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Nombre</th>
-      <th>Edición</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="row-fluid">
+  <div class="span9">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Edición</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @cards.each do |card| %>
-      <tr>
-        <td><%= card.id %></td>
-        <td><%= card.card_type.name %></td>
-        <td><%= card.card_type.edition %></td>
-        <td><%= link_to 'Ver', card %></td>
-        <!-- ROTO - Arreglar en controlador <td><%= link_to 'Modificar', edit_card_path(card) %></td> -->
-        <td><%= link_to 'Eliminar', card, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @cards.each do |card| %>
+          <tr>
+            <td><%= card.id %></td>
+            <td><%= card.card_type.name %></td>
+            <td><%= card.card_type.edition %></td>
+            <td><%= link_to 'Ver', card, :class => "btn btn-small" %></td>
+            <td><%= link_to 'Eliminar', card, method: :delete, data: { confirm: '¿Estás seguro?' }, :class => "btn btn-mini btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <br>
+<div class="row-fluid">
+  <div class="span1"><%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>
+  <div class="span2"><%= link_to 'Añadir Carta', new_card_path, :class => "btn btn-success" %>
+  </div>  
+</div>
 
-<%= link_to 'Añadir Carta', new_card_path %>
-<%= link_to 'Inicio', controller: "welcome" %>
