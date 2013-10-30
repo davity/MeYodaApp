@@ -27,22 +27,22 @@ end
 
 def edit
 	@sale = Sale.find (params[:id])
+	@card = @sale.card
 end
 
 def update
 	@sale = Sale.find (params[:id])
-	
 	if @sale.update (params[:sale].permit(:starting_price))
-	redirect_to @sale
+	  redirect_to @sale
 	else
-	render "edit"
+	  render "edit"
 	end
 end
 
 def destroy
 	@sale = Sale.find (params[:id])
 	@sale.destroy
-	redirect_to sales_path
+	redirect_to @sale
 end
 
 

@@ -1,6 +1,33 @@
 
 <h1> Edita tu Carta </h1>
 
-<%= render "form" %>
+<%= form_for @sale do |f| %>
+  
+  <% if @sale.errors.any? %>
+  
+	<div id="errorExplanation">
+    	<h2><%= pluralize(@sale.errors.count, "error") %> 
+	prohibited this post from being saved:</h2>
+    
+	<ul>
+	<% @sale.errors.full_messages.each do |msg| %>
+      		<li><%= msg %></li>
+    	<% end %>
+    	</ul>
+  
+	</div>
 
-<%= link_to "Volver a Mis Cartas a la Venta", sales_path %>
+  <% end %>
+
+  <p>
+    <%= f.label :starting_price %><br>
+    <%= f.number_field :starting_price %> €
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+  
+
+<% end %>
+
+<%= render "form" %>
