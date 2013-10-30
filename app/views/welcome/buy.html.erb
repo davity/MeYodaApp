@@ -1,0 +1,29 @@
+<h1>Cartas cotizando</h1>
+
+<table>
+  <tr>
+    <th>Owner username</th>
+    <th>Card Name</th>
+    <th>Edition</th>
+    <th>Price</th>
+    <th></th>
+  </tr>
+  <% @card_types.each do |card_type| %>
+    <%if card_type.cards.any? %>
+    <tr>
+      <th><%= card_type.cards.first.user.username %></th>
+      <th><%= card_type.name %></th>
+      <th><%= card_type.edition %></th>
+      <th><%= card_type.cards.first.sale.starting_price * (1.10 + @george -1) %> €</th>
+      <th><%= button_to('Bill', new_bill_path, method: "get") %></th>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+<p><%= link_to 'Tipos de cartas' , card_types_path %></p>
+<p><%= link_to 'Cartas' , cards_path %></p>
+<%= link_to "See all selling cards", sales_path %>
+<%= render "sessions/logger" %>
+<% if session[:user_id] %>
+<%= button_to('Home', home_path, method: "get") %>
+<% end %>
