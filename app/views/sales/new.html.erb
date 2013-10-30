@@ -1,7 +1,9 @@
-<h1> Nueva Carta a la Venta </h1>
-
-<h2> Introduce el Precio Inicial de tu carta: </h2>
-
-<%= render "form" %>
-
-<%= link_to "Volver a Mis Cartas a la Venta", sales_path %>
+<h2>Vender nueva carta</h2>
+<br />
+<div class="row-fluid">
+	<div class="span9">
+		<%= render 'form' %>
+	</div>
+</div>
+<br />
+<%= link_to 'Atras', sales_path, :class => "btn" %>

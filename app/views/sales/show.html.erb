@@ -1,9 +1,24 @@
+<div class="row-fluid">
+	<div class="span2">
+		<h3>Carta </h3>
+		<br />
+	</div>
+</div>
 
-<p>
-	<strong> Precio de Salida: </strong>
-	<%= @sale.starting_price %> €
-</p>
-
-
-<%= link_to "Volver a Mis Cartas a la Venta", sales_path %> |
-<%= link_to "Editar Carta", edit_sale_path %>
+<div class="row-fluid">
+	<div class="span1">
+		<strong>Precio: </strong>
+	</div>
+	<div class="span3">
+ 		<%= @sale.starting_price %> €
+	</div>
+</div>
+<br />
+<div class="row-fluid">
+	<div class="span1">
+		<%= link_to 'Atras', sales_path, :class => "btn" %>
+	</div>
+	<div class="span2">
+		<%= link_to "Editar", edit_sale_path, :class => "btn btn-warning" %>
+	</div>  
+</div>

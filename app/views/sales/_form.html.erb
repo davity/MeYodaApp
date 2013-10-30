@@ -1,28 +1,33 @@
-<%= form_for @sale do |f| %>
+<%= form_for @sale, :html => {:class => "form-horizontal"} do |f| %>
   
   <% if @sale.errors.any? %>
-  
-	<div id="errorExplanation">
-    	<h2><%= pluralize(@sale.errors.count, "error") %> 
-	prohibited this post from being saved:</h2>
+  	<p>
+      	<h2><%= pluralize(@sale.errors.count, "error") %> 
+  	prohibited this post from being saved:</h2>
+      
+  	     <ul>
+          <% @sale.errors.full_messages.each do |msg| %>
+        		<li><%= msg %></li>
+          <% end %>
+      	</ul>
     
-	<ul>
-	<% @sale.errors.full_messages.each do |msg| %>
-      		<li><%= msg %></li>
-    	<% end %>
-    	</ul>
-  
-	</div>
-
+  	</p>
   <% end %>
 
-  <p>
-    <%= f.label :starting_price %><br>
-    <%= f.number_field :starting_price %> €
-  </p>
+  <div class="control-group">
+    <%= f.label :starting_price, :class => "control-label" %>
+    <div class="controls">
+      <div class="input-append">
+        <%= f.number_field :starting_price, :type => "number" %>
+        <span class="add-on">€</span>
+      </div>
+    </div>
+  </div>
   
-  <p>
-    <%= f.submit %>
-  </p>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit :class => "btn btn-success" %>
+    </div>
+  </div>
 
 <% end %>
