@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       @current_user = User.find session[:user_id]
       return true
     else
-    # if not, we are redirected to autenticate
+    # if not, we are redirected to login
       redirect_to(:controller => 'sessions', :action => 'login')
       return false
     end

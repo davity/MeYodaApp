@@ -1,9 +1,43 @@
-<h1>Sessions#home</h1>
-<p>Find me in app/views/sessions/home.html.erb</p>
-<h2 class='User_Header'><%=@current_user.username%> Home </h2>
+<h1><%=@user.username%>'s Home</h1>
 
 <% flash.each do |name, notice| -%>
   <%= content_tag :div, notice, class: name %>
 <% end -%>
 
-<%= button_to('Log Out', logout_path, method: "get") %>
+<% if @user.errors.any? %>
+  <ul class="Signup_Errors">
+  <% for message_error in @user.errors.full_messages %>
+    <li><%= message_error %></li>
+  <% end %>
+  </ul>
+<% end %>
+<% if @user.account.errors.any? %>
+    Account error:</br>
+    <ul class="Signup_Errors">
+    <% for message_error in @user.account.errors.full_messages %>
+      <li><%= message_error %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+<table>
+  <%= form_for @user, :url => {:controller => 'users', :action => 'update'} do |f| %>
+    <tr><th>Username: </th><th><%= f.text_field :username%></th></tr>
+    <tr><th>Email: </th><th><%= f.text_field :email%></th></tr>
+    <tr><th>Change Password: </th><th><%= f.password_field :password%></th></tr>
+    <tr><th>Password Confirmation: </th><th><%= f.password_field :password_confirmation%></th></tr>
+    <%= fields_for @user.account do |account_fields| %>
+      <tr><th>Account number: </th><th><%= account_fields.text_field :number %></th></tr>
+      <tr><th>Balance: </th><th><%= account_fields.number_field :balance%></th></tr>
+    <% end %>
+    <tr><th><%= f.submit :Update %></th><th></th></tr>
+  <% end %>
+
+
+
+    
+
+ <tr><th><%= button_to('Log Out', logout_path, method: "get") %></th><th></th></tr>
+ <tr><th><%= button_to('Atras', root_path, method: "get") %></th><th></th></tr>
+
+</table>

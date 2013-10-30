@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   #include AccountsController
-      
   before_filter :save_login_state, :only => [:new, :create]
+  before_filter :authenticate_user, :only => [:update]
   
   def index
     @users = User.all
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    @account = Account.new
+    @account = @user.build_account()
   end
   
   def create
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     if @user.save
     # once we have a user we try to create its account
       params[:account][:balance] = 0.0
-      @account = @user.accounts.new(params[:account].permit(:number, :balance))
+      @account = @user.build_account(params[:account].permit(:number, :balance))
       if @account.save
         flash[:valid] = "#{@user.username} user signed up successfully"
         redirect_to users_path and return
@@ -36,7 +36,25 @@ class UsersController < ApplicationController
 		redirect_to users_path
   end
   
+  def update
+    @user = @current_user
+    @user.update(user_params)
+    @user.account.update(account_params)
+    if @user.errors.any?
+      redirect_to home_path, :flash =>{:error => @user.errors.full_messages.first}
+    elsif @user.account.errors.any?
+      redirect_to home_path, :flash =>{:error => @user.account.errors.full_messages.first}
+    else
+      redirect_to home_path, :flash =>{:valid => @user.username + 'user updated succesfully'}
+    end
+  end
+  
   def user_params
     params.require(:user).permit(:username,:email,:password,:password_confirmation)
   end
+  
+  def account_params
+    params.require(:account).permit(:number,:balance)
+  end
+  
 end
