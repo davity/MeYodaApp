@@ -3,6 +3,8 @@ class SalesController < ApplicationController
 
 def new
 	@sale = Sale.new
+	@card = Card.find(params[:format])
+	params[:card => @card.id]
 end
 
 def index
@@ -10,14 +12,13 @@ def index
 end
 
 def create
-	@sale = Sale.new (params[:sale].permit(:starting_price))
-	
+  @card = Card.find(params[:card_id])
+  @sale = @card.build_sale(params[:sale].permit(:starting_price))
 	if @sale.save
-	redirect_to @sale
+	  redirect_to @sale
 	else
-	render "new"
+	  render "new"
 	end
-
 end
 
 def show
