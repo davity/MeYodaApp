@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :authenticate_user, :only => [:home, :profile, :setting]
+  before_filter :authenticate_user, :only => [:home]
   before_filter :save_login_state, :only => [:login, :login_attempt]
   
   def login
@@ -17,13 +17,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def user_params
-    params.require(:session).permit(:username_or_email)
-  end
-  
-  def login_params
-    params.require(:user).permit(:login_password)
-  end
   
   def logout
     session[:user_id] = nil
@@ -31,11 +24,7 @@ class SessionsController < ApplicationController
   end
   
   def home
+    @user = @current_user
   end
-
-  def profile
-  end
-
-  def setting
-  end
+  
 end
