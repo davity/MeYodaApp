@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       return true
     else
     # if not, we are redirected to login
-      redirect_to(:controller => 'sessions', :action => 'login')
+      redirect_to(:controller => 'sessions', :action => 'login')	
       return false
     end
   end

@@ -15,15 +15,17 @@
       <th><%= card_type.name %></th>
       <th><%= card_type.edition %></th>
       <th><%= card_type.cards.first.sale.starting_price * (1.10 + @george -1) %> €</th>
-      <th><%= button_to('Bill', new_bill_path, method: "get") %></th>
+      <th><%= button_to("Bid", {:controller => "bids", :action => "new", :card_type_id => card_type.id, :method => :get})%></th>
     </tr>
     <% end %>
   <% end %>
 </table>
-<p><%= link_to 'Tipos de cartas' , card_types_path %></p>
-<p><%= link_to 'Cartas' , cards_path %></p>
-<%= link_to "See all selling cards", sales_path %>
+<div class="row-fluid">
+  <div class="span1"><%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>
+  <% if session[:user_id] %>
+  <div class="span2"><%= link_to 'Home', home_path, :class => "btn" %>
+  </div>
+  <% end %>
+</div>
 <%= render "sessions/logger" %>
-<% if session[:user_id] %>
-<%= button_to('Home', home_path, method: "get") %>
-<% end %>

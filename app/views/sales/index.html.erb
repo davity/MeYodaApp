@@ -1,30 +1,36 @@
-<h1> Mis Cartas a la Venta </h1>
+<h2>Mis Cartas a la Venta</h2>
 
-<%= link_to "Nueva Carta a la Venta", new_sale_path %>
+<div class="row-fluid">
+  <div class="span6">
+    <table class="table">
+      <thead>
+      	<tr>
+          <th>ID Venta</th>
+        	<th>Carta</th>
+        	<th>Precio Inicial</th>
+          <th>Usuario</th>
+      	</tr>
+      </thead>
+      <tbody>
+      	<% @sale.each do |sale| %>
+      		<tr>
+        		<td><%= sale.id %> </td>
+            <td><%= sale.card.card_type.name %> </td>
+            <td><%= sale.starting_price %> €</td>
+            <td><%= sale.card.user.username %> </td>
+         		<td><%= link_to "Ver", sale_path(sale), :class => "btn btn-small btn-info" %></td>
+        		<td><%= link_to "Editar", edit_sale_path(sale), :class => "btn btn-small btn-warning" %></td>
+         		<td><%= link_to 'Destroy',sale_path(sale), method: :delete, data:{confirm:'Are you sure?'}, :class => "btn btn-small btn-danger" %></td>
+      		</tr>
+       	<% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<table>
-	<tr>
-	<th>SaleID |</th> 
-	<th>Carta |</th> 
-	<th>Precio Inicial </th>
-	<th>User |</th> 
-	<th>Precio Inicial </th>
-	</tr>
-
- 	<% @sale.each do |sale| %>
-    		<tr>
-     		<td><%= sale.id %> </td>
-     		<td><%= sale.card.card_type.name %> </td>
-     		<td><%= sale.starting_price %> € </td>
-     		<td><%= sale.card.user.username %> </td>
-       	<td><%= link_to "Show", sale_path(sale) %></td>
-    		<td><%= link_to "Edit", edit_sale_path(sale) %></td>
-     		<td><%= link_to 'Destroy',sale_path(sale),
-                               method: :delete, 
-                               data:{confirm:'Are you sure?'}%>	
-                               </td>
-    		</tr>
- 	<% end %>
-
-</table>
-<%= button_to('Index', root_path, method: "get") %>
+<div class="row-fluid">
+  <div class="span1"><%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>
+  <div class="span2"><%= link_to 'Añadir Venta', new_sale_path, :class => "btn btn-success" %>
+  </div>  
+</div>

@@ -1,0 +1,8 @@
+<h1>Bid for a Card</h1>
+
+Card Name: <%= @card_type.name %></br>
+Price: <%= @card_type.cards.first.sale.starting_price * (1.10 + @george.to_f - 1) %></br>
+
+<%= link_to 'Añadir Tipo de Carta', new_card_type_path %>
+
+<%= link_to 'Inicio', controller: "welcome" %>

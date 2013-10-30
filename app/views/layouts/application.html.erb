@@ -7,8 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+	<div class="container-fluid">
+	    <div class="row-fluid">
+	    	<div class="span12">
+			    <div class="navbar">
+				    <div class="navbar-inner">
+				    	 <a class="brand" href="#">MeYoda</a>
+					    <ul class="nav">
+						    <li><%= link_to "Inicio", root_path %></li>
+						    <li><a href="#">Link</a></li>
+						    <li><a href="#">Link</a></li>
+					    </ul>
+				    </div>
+			    </div>
+			</div>
+		</div>
+	    <div class="row-fluid">
+			<div class="span12 offset1">
+				<%= yield %>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

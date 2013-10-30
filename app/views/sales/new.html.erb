@@ -1,34 +1,39 @@
-<h1> Nueva Carta a la Venta </h1>
+<h1>Vender una nueva carta</h1>
 
-<h2> Introduce el Precio Inicial de tu carta: </h2>
+<h2>Introduce el Precio Inicial de tu carta:</h2>
 
 <%= form_for @sale, :url =>sales_path(@sale, :card_id => @card.id) do |f| %>
   
   <% if @sale.errors.any? %>
-  
-	<div id="errorExplanation">
-    	<h2><%= pluralize(@sale.errors.count, "error") %> 
-	prohibited this post from being saved:</h2>
-    
-	<ul>
-	<% @sale.errors.full_messages.each do |msg| %>
-      		<li><%= msg %></li>
-    	<% end %>
-    	</ul>
-  
-	</div>
-
+  	<div id="errorExplanation">
+      	<h2><%= pluralize(@sale.errors.count, "error") %> 
+  	prohibited this post from being saved:</h2>
+      
+  	<ul>
+  	<% @sale.errors.full_messages.each do |msg| %>
+        		<li><%= msg %></li>
+      	<% end %>
+      	</ul>
+  	</div>
   <% end %>
 
-  <p>
-    <%= f.label :starting_price %><br>
-    <%= f.number_field :starting_price %> €
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-  
 
+  <div class="control-group">
+    <%= f.label :starting_price, :class => "control-label" %>
+    <div class="controls">
+      <div class="input-append">
+        <%= f.number_field :starting_price, :type => "number" %>
+        <span class="add-on">€</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit :class => "btn btn-success" %>
+    </div>
+  </div>
 <% end %>
 
-<%= render "form" %>
+<%= link_to 'Atras', sales_path, :class => "btn" %>
+<%= link_to 'Inicio', root_path, :class => "btn" %>

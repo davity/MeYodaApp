@@ -26,27 +26,27 @@ class CardsController < ApplicationController
 		end
 	end
 
-	def edit
-		@card = Card.find(params[:id])
-		@card_types = CardType.all
-	end
+	# def edit
+	# 	@card = Card.find(params[:id])
+	# 	@card_types = CardType.all
+	# end
 
-	# ROTO - Arreglar
-	def update
+	# # ROTO - Arreglar
+	# def update
 
-		@card = Card.find(params[:id])
-		@card_type = @card.card_type
-		@card_type.delete_if{ |c| c.id == @card.id }
+	# 	@card = Card.find(params[:id])
+	# 	@card_type = @card.card_type
+	# 	@card_type.delete_if{ |c| c.id == @card.id }
 
-		@card_type = CardType.find_by(:name => params[:card][:card_types][:name])
-		@card_type << @card
+	# 	@card_type = CardType.find_by(:name => params[:card][:card_types][:name])
+	# 	@card_type << @card
 
-		if @card.update(@card)
-		  redirect_to @current_user
-		else
-	      render action: 'edit'
-	  	end
-	end
+	# 	if @card.update(@card)
+	# 	  redirect_to @card
+	# 	else
+	#       render action: 'edit'
+	#   	end
+	# end
 
 	def destroy
 		@card = Card.find(params[:id])
