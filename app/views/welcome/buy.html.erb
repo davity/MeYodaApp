@@ -1,21 +1,54 @@
 <h1>Cartas cotizando</h1>
 
+<% flash.each do |name, notice| -%>
+  <%= content_tag :div, notice, class: name %>
+<% end -%>
+
 <table>
   <tr>
     <th>Owner username</th>
     <th>Card Name</th>
     <th>Edition</th>
     <th>Price</th>
+    <th>Your bids</th>
     <th></th>
   </tr>
   <% @card_types.each do |card_type| %>
-    <%if card_type.cards.any? %>
+    
+    <% @low_price = 0 %>
+    <% if Card.where(card_type_id: card_type.id).joins(:sale).any? %>
+      <% @low_price = Card.where(card_type_id: card_type.id).joins(:sale).first.sale.starting_price %>
+    <% end %>
+    
     <tr>
+    <%if card_type.cards.any?  %>
+      <% card_type.cards.each do |card| %>
+      
+        <% if not(card.sale.nil?) %>
+          <% if @low_price > card.sale.starting_price %>
+            <% @low_price = card.sale.starting_price %>
+          <% end %>
+        <% end %>
+      <% end %>
       <th><%= card_type.cards.first.user.username %></th>
       <th><%= card_type.name %></th>
       <th><%= card_type.edition %></th>
-      <th><%= card_type.cards.first.sale.starting_price * (1.10 + @george -1) %> €</th>
-      <th><%= button_to("Bid", {:controller => "bids", :action => "new", :card_type_id => card_type.id, :method => :get})%></th>
+      <th><% if @low_price > 0 %>
+            <%= @low_price * (@earn.to_f + @george.to_f - 1) %> €
+          <% else %>
+            Not saled
+          <% end %>
+          </th>
+      <th>
+      <% if session[:user_id] %>
+        <% if @user.bids.where(card_type_id: card_type.id).any? %>
+          <%= @user.bids.find_by(:card_type_id => card_type.id).value %>
+          <th><%= button_to('Remove', {:controller => "bids", :action => "delete", :id => card_type.id}, data: { confirm: '¿Estás seguro?' }, method: :delete) %>
+        <% else %>
+          <%= button_to("Bid", {:controller => "bids", :action => "new", :id => card_type.id}, method: :get)%>
+        <% end %>
+      <% end %>
+      </th>
     </tr>
     <% end %>
   <% end %>

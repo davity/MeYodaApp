@@ -3,8 +3,7 @@ class SalesController < ApplicationController
 
 def new
 	@sale = Sale.new
-	@card = Card.find(params[:format])
-	params[:card => @card.id]
+	@card = Card.find(params[:card_id])
 end
 
 def index

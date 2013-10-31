@@ -54,7 +54,7 @@
                                method: :delete,
                                data:{confirm:'Are you sure?'}%>	
         <% else %>
-          <%= link_to 'Set price', new_sale_path(card) %>
+          <%= link_to('Set price', { :controller => "sales", :action => "new", :card_id => card.id }, method: :get) %>
         <% end %></br>
         <%= link_to 'Remove', card, method: :delete, data: { confirm: '¿Estás seguro?' } %>
       </th>

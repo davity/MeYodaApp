@@ -19,7 +19,9 @@ MeYodaApp::Application.routes.draw do
   match "logout" => "sessions#logout", via: :get
   match "home" => "sessions#home", via: :get
   match "buy" => "welcome#buy", via: :get
-  match "buy/new" => "bids#buy", via: :get
+  match "buy/new/:id" => "bids#new", via: :get
+  match "buy/new/:id" => "bids#create", via: :post
+  match "buy/delete/:id" => "bids#destroy", via: :delete
   
 
   # Authentication (http://www.sitepoint.com/rails-userpassword-authentication-from-scratch-part-i/)
