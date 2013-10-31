@@ -8,8 +8,8 @@
 					<th>ID</th>
 					<th>Nombre</th>
 					<th>Edición</th>
+					<th>Imagen</th>
 					<th></th>
-				    <th></th>
 				    <th></th>
 				</tr>
 			</thead>
@@ -19,6 +19,7 @@
 					<td><%= ctype.id %></td>
 					<td><%= ctype.name %></td>
 					<td><%= ctype.edition %></td>
+					<td><%= image_tag "#{ctype.photo_dir}" %></td>
 					<td><%= link_to 'Ver', card_type_path(ctype), :class => "btn btn-info btn-small" %></td>
 					<!-- <td><%= link_to 'Editar', edit_card_type_path(ctype), :class => "btn btn-small btn-warning" %></td> -->
 					<td><%= link_to 'Borrar', card_type_path(ctype), method: :delete, data: {confirm: '¿Estás seguro?' }, :class => "btn btn-small btn-danger" %></td>

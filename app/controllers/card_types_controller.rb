@@ -43,6 +43,6 @@ class CardTypesController < ApplicationController
 
 	private
 		def card_type_params
-			params.require(:card_type).permit(:name, :edition)
+			params.require(:card_type).permit(:name, :edition, :photo_dir)
 		end
 end

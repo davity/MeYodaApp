@@ -1,0 +1,31 @@
+<h1>Cartas cotizando</h1>
+
+<table>
+  <tr>
+    <th>Owner username</th>
+    <th>Card Name</th>
+    <th>Edition</th>
+    <th>Price</th>
+    <th></th>
+  </tr>
+  <% @card_types.each do |card_type| %>
+    <%if card_type.cards.any? %>
+    <tr>
+      <th><%= card_type.cards.first.user.username %></th>
+      <th><%= card_type.name %></th>
+      <th><%= card_type.edition %></th>
+      <th><%= card_type.cards.first.sale.starting_price * (1.10 + @george -1) %> €</th>
+      <th><%= button_to("Bid", {:controller => "bids", :action => "new", :card_type_id => card_type.id, :method => :get})%></th>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+<div class="row-fluid">
+  <div class="span1"><%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>
+  <% if session[:user_id] %>
+  <div class="span2"><%= link_to 'Home', home_path, :class => "btn" %>
+  </div>
+  <% end %>
+</div>
+<%= render "sessions/logger" %>
