@@ -1,4 +1,4 @@
-<h2>Mis Cartas a la Venta</h2>
+<h2>Cartas a la Venta</h2>
 
 <div class="row-fluid">
   <div class="span6">
@@ -18,19 +18,17 @@
             <td><%= sale.card.card_type.name %> </td>
             <td><%= sale.starting_price %> €</td>
             <td><%= sale.card.user.username %> </td>
-         		<td><%= link_to "Ver", sale_path(sale), :class => "btn btn-small btn-info" %></td>
-        		<td><%= link_to "Editar", edit_sale_path(sale), :class => "btn btn-small btn-warning" %></td>
-         		<td><%= link_to 'Destroy',sale_path(sale), method: :delete, data:{confirm:'Are you sure?'}, :class => "btn btn-small btn-danger" %></td>
+         		<!-- <td><%= link_to "Ver", sale_path(sale), :class => "btn btn-small btn-info" %></td> -->
+        		<!-- <td><%= link_to "Editar", edit_sale_path(sale), :class => "btn btn-small btn-warning" %></td> -->
+         		<!-- <td><%= link_to 'Destroy',sale_path(sale), method: :delete, data:{confirm:'Are you sure?'}, :class => "btn btn-small btn-danger" %></td> -->
       		</tr>
        	<% end %>
       </tbody>
     </table>
   </div>
 </div>
-
+<hr>
 <div class="row-fluid">
   <div class="span1"><%= link_to 'Inicio', root_path, :class => "btn" %>
-  </div>
-  <div class="span2"><%= link_to 'Añadir Venta', new_sale_path, :class => "btn btn-success" %>
   </div>  
 </div>

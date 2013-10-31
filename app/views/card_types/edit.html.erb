@@ -1,5 +1,37 @@
-<h1>Editar tipo de carta</h1>
+<h2>Editar tipo de carta</h2>
+<br />
+<%= form_for :card_type, action: 'update', :action => 'update' , :html => {:class => "form-horizontal"} do |f| %>
+	
+	<% if @card_type.errors.any? %>
+		<div id="errorExplanation">
+			<h2><%= pluralize(@card_type.errors.count, "error") %> impiden guardar la carta</h2>
+			<ul>
+				<% @card_type.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<%end %>
+			</ul>
+		</div>
+	<% end %>
 
-<%= render 'form' %>
+	<div class="control-group">
+      <%= f.label :name, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
+    </div>
 
-<%= link_to 'Atrás', card_types_path %>
+    <div class="control-group">
+      <%= f.label :edition, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :edition %>
+      </div>
+    </div>
+
+	<div class="control-group">
+      <div class="controls">
+        <%= f.submit :class => "btn btn-success" %>
+      </div>
+    </div>
+<% end %>
+<br />
+<%= link_to 'Atrás', card_types_path, :class => "btn" %>

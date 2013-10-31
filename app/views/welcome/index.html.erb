@@ -2,12 +2,40 @@
 
 <p>Gracias por confiar en nosotros para la compraventa de cartas de Star Wars</p>
 <br />
-<%= button_to 'Buy Cards' , buy_path, method: :get, :class => "btn span2" %>
-<%= button_to 'Card Types' , card_types_path, method: :get, :class => "btn span2" %>
-<%= button_to 'Cards' , cards_path, method: :get, :class => "btn span2" %>
-<%= button_to 'Sails' , sales_path, method: :get, :class => "btn span2" %>
-<%= button_to 'Users', users_path, method: "get", :class => "btn btn-primary span2" %>
-<%= render "sessions/logger" %>
 <% if session[:user_id] %>
-	<%= button_to 'Home', home_path, method: :get, :class => "btn span2" %>
+	<div class="row">
+		<div class="span3">
+			<%= link_to 'Mi cuenta', home_path, :class => "btn span2" %>
+	  	</div>
+	</div>
+<% else %>
+	<div class="row">
+		<div class="span3">
+			<%= link_to 'Usuarios', users_path, :class => "btn span2" %>
+	  	</div>
+	</div>
 <% end %>
+<br />
+<div class="row">
+	<div class="span3">
+		<%= link_to 'Tipos de cartas' , card_types_path, :class => "btn span2" %>
+  	</div>
+</div>
+<br />
+<div class="row">
+	<div class="span3">
+		<%= link_to 'Cartas' , cards_path, :class => "btn span2" %>
+  	</div>
+</div>
+<br />
+<div class="row">
+	<div class="span3">
+		<%= link_to 'Ventas' , sales_path, :class => "btn span2" %>
+  	</div>
+</div>
+<br />
+<div class="row">
+	<div class="span3">
+		<%= link_to 'Comprar cartas' , buy_path, method: :get, :class => "btn span2" %>
+  	</div>
+</div>

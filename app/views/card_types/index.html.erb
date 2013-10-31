@@ -1,27 +1,41 @@
-<h1>Tipos de cartas</h1>
-<%= link_to 'Añadir', new_card_type_path %><br /><br />
-
-<table>
-	<tr>
-		<th>Nombre</th>
-		<th>Edición</th>
-		<th></th>
-	    <th></th>
-	    <th></th>
-	</tr>
-
-	<% @card_types.each do |ctype| %>
-	<tr>
-		<td><%= ctype.name %></td>
-		<td><%= ctype.edition %></td>
-		<td><%= link_to 'Ver', card_type_path(ctype) %></td>
-		<td><%= link_to 'Editar', edit_card_type_path(ctype) %></td>
-		<td><%= link_to 'Borrar', card_type_path(ctype), method: :delete, data: {confirm: '¿Estás seguro?' } %></td>
-	</tr>
-	<% end %>
-</table>
+<h2>Tipos de cartas</h2>
 <br />
+<div class="row-fluid">
+	<div class="span7">
+	    <table class="table">
+	    	<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Edición</th>
+					<th>Imagen</th>
+					<th></th>
+				    <th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @card_types.each do |ctype| %>
+				<tr>
+					<td><%= ctype.id %></td>
+					<td><%= ctype.name %></td>
+					<td><%= ctype.edition %></td>
+					<td><%= image_tag "#{ctype.photo_dir}" %></td>
+					<td><%= link_to 'Ver', card_type_path(ctype), :class => "btn btn-info btn-small" %></td>
+					<!-- <td><%= link_to 'Editar', edit_card_type_path(ctype), :class => "btn btn-small btn-warning" %></td> -->
+					<td><%= link_to 'Borrar', card_type_path(ctype), method: :delete, data: {confirm: '¿Estás seguro?' }, :class => "btn btn-small btn-danger" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>
 
-<%= link_to 'Añadir Tipo de Carta', new_card_type_path %>
-
-<%= link_to 'Inicio', controller: "welcome" %>
+<hr>
+<div class="row-fluid">
+  <div class="span1">
+	<%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>
+  <div class="span2">
+  	<%= link_to 'Añadir Tipo', new_card_type_path, :class => "btn btn-success" %>
+  </div>  
+</div>

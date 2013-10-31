@@ -1,6 +1,6 @@
-<h2> Edita tu Carta </h2>
+<h2> Editar venta de carta </h2>
 
-<%= form_for @sale do |f| %>
+<%= form_for @sale, :html => {:class => "form-horizontal"} do |f| %>
   
   <% if @sale.errors.any? %>
   	<div id="errorExplanation">
@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="control-group">
-    <%= f.label :starting_price, :class => "control-label" %>
+    <%= f.label "Precio inicial", :class => "control-label" %>
     <div class="controls">
       <div class="input-append">
         <%= f.number_field :starting_price, :type => "number" %>
@@ -25,7 +25,7 @@
   
   <div class="control-group">
     <div class="controls">
-      <%= f.submit :class => "btn btn-success" %>
+      <%= f.submit "Actualizar", :class => "btn btn-success" %>
     </div>
   </div>
   
@@ -33,13 +33,10 @@
 
 <div class="row-fluid">
   <div class="span1">
-    <%= link_to 'Atras', sales_path, :class => "btn" %>
+    <%= link_to "Cuenta", home_path, :class => "btn" %>
   </div>
   <div class="span2">
-    <%= link_to "Seelling cards", sales_path %>
-  </div>
-  <div class="span1">
-    <%= link_to "Home", home_path %>
+    <%= link_to "Cartas en venta", sales_path, :class => "btn" %>
   </div>
 </div>
 

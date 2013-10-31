@@ -1,33 +1,40 @@
 <h1>Users list</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>Email</th>
-      <th>Account number</th>
-      <th>Account balance</th>
-      <th></th>
-    </tr>
-  </thead>
+<div class="row-fluid">
+  <div class="span9">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Numero cuenta</th>
+            <th>Saldo</th>
+            <th></th>
+          </tr>
+        </thead>
 
-  <% flash.each do |name, notice| -%>
-    <%= content_tag :div, notice, class: name %>
-  <% end -%>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.username %></td>
-        <td><%= user.email %></td>
-        <td><%= user.account.number %></td>
-        <td><%= user.account.balance %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= render "sessions/logger" %>
-<%= button_to('New User', new_user_path, method: "get") %>
-<%= button_to('Atras', root_path, method: "get") %>
+        <% flash.each do |name, notice| -%>
+          <%= content_tag :div, notice, class: name %>
+        <% end -%>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+              <td><%= user.account.number %></td>
+              <td><%= user.account.balance %></td>
+              <td><%= link_to 'Eliminar', user, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-small btn-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
+<br />
+<div class="row-fluid">
+  <div class="span1">
+    <%= button_to('Atras', root_path, method: "get", :class => "btn") %>
+  </div>
+  <div class="span2">
+    <%= button_to('Nuevo Usuario', new_user_path, method: "get", :class => "btn btn-success") %>
+  </div>  
+</div>

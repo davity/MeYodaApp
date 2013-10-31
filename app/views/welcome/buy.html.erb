@@ -1,64 +1,72 @@
-<h1>Cartas cotizando</h1>
-
-<% flash.each do |name, notice| -%>
-  <%= content_tag :div, notice, class: name %>
-<% end -%>
-
-<table>
-  <tr>
-    <th>Owner username</th>
-    <th>Card Name</th>
-    <th>Edition</th>
-    <th>Price</th>
-    <th>Your bids</th>
-    <th></th>
-  </tr>
-  <% @card_types.each do |card_type| %>
-    
-    <% @low_price = 0 %>
-    <% if Card.where(card_type_id: card_type.id).joins(:sale).any? %>
-      <% @low_price = Card.where(card_type_id: card_type.id).joins(:sale).first.sale.starting_price %>
-    <% end %>
-    
-    <tr>
-    <%if card_type.cards.any?  %>
-      <% card_type.cards.each do |card| %>
-      
-        <% if not(card.sale.nil?) %>
-          <% if @low_price > card.sale.starting_price %>
-            <% @low_price = card.sale.starting_price %>
-          <% end %>
-        <% end %>
-      <% end %>
-      <th><%= card_type.cards.first.user.username %></th>
-      <th><%= card_type.name %></th>
-      <th><%= card_type.edition %></th>
-      <th><% if @low_price > 0 %>
-            <%= @low_price * (@earn.to_f + @george.to_f - 1) %> €
-          <% else %>
-            Not saled
-          <% end %>
-          </th>
-      <th>
-      <% if session[:user_id] %>
-        <% if @user.bids.where(card_type_id: card_type.id).any? %>
-          <%= @user.bids.find_by(:card_type_id => card_type.id).value %>
-          <th><%= button_to('Remove', {:controller => "bids", :action => "delete", :id => card_type.id}, data: { confirm: '¿Estás seguro?' }, method: :delete) %>
-        <% else %>
-          <%= button_to("Bid", {:controller => "bids", :action => "new", :id => card_type.id}, method: :get)%>
-        <% end %>
-      <% end %>
-      </th>
-    </tr>
-    <% end %>
-  <% end %>
-</table>
+<h2>Cartas cotizando</h2>
+<br />
 <div class="row-fluid">
-  <div class="span1"><%= link_to 'Inicio', root_path, :class => "btn" %>
+  <div class="span10">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Card Name</th>
+          <th>Edition</th>
+          <th>Imagen</th>
+          <th>Precio</th>
+          <th>Tus pujas</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @card_types.each do |card_type| %>
+          
+          <% @low_price = 0 %>
+          <% if Card.where(card_type_id: card_type.id).joins(:sale).any? %>
+            <% @low_price = Card.where(card_type_id: card_type.id).joins(:sale).first.sale.starting_price %>
+          <% end %>
+          
+          <tr>
+          <%if card_type.cards.any?  %>
+            <% card_type.cards.each do |card| %>
+            
+              <% if not(card.sale.nil?) %>
+                <% if @low_price > card.sale.starting_price %>
+                  <% @low_price = card.sale.starting_price %>
+                <% end %>
+              <% end %>
+            <% end %>
+            
+            <td><%= card_type.name %></td>
+            <td><%= card_type.edition %></td>
+					  <td><%= image_tag "#{card_type.photo_dir}" %></td>
+            <td>
+              <% if @low_price > 0 %>
+                <%= @low_price * (@earn.to_f + @george.to_f - 1) %> €
+              <% else %>
+                Not saled
+              <% end %>
+            </td>
+            <td>
+              <% if session[:user_id] %>
+                <% if @user.bids.where(card_type_id: card_type.id).any? %>
+                  <%= @user.bids.find_by(:card_type_id => card_type.id).value %>
+                  </td>
+                  <td> <%= link_to('Anular puja',{ :controller => "bids", :action => "destroy", :id => card_type.id }, method: :delete, :class => "btn btn-small btn-danger") %>
+                <% else %>
+                  <%= link_to("Pujar", {:controller => "bids", :action => "new", :id => card_type.id}, method: :get, :class => "btn")%>
+                <% end %>
+              <% end %>
+            </td>
+          </td>
+          <% end %>
+        <% end %>
+        
+      </tbody>
+    </table>
   </div>
-  <% if session[:user_id] %>
-  <div class="span2"><%= link_to 'Home', home_path, :class => "btn" %>
-  </div>
-  <% end %>
 </div>
-<%= render "sessions/logger" %>
+<hr>
+<div class="row-fluid">
+  <div class="span1">
+  <%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>
+  <div class="span2">
+    <%= link_to 'Mi Cuenta', home_path, :class => "btn" %>
+  </div>  
+</div>

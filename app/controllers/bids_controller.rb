@@ -25,7 +25,8 @@ class BidsController < ApplicationController
   end
   
   def destroy
-    @bid = Bid.find(params[:id])
+    @user = User.find session[:user_id]
+    @bid = @user.bids.find_by(params[:id])
 		@bid.destroy
 		redirect_to buy_path
   end

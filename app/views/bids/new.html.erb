@@ -1,4 +1,5 @@
-<h1>Bid for a Card</h1>
+<h2>Puja por esta carta</h1>
+<br />
 
 <% if @bid.errors.any? %>
   <ul class="Bidding_Errors">
@@ -8,14 +9,49 @@
   </ul>
 <% end %>
 
-Card Name: <%= @card_type.name %></br>
-Price: <%= @low_price.to_f * (@earn.to_f + @george.to_f - 1) %></br>
+<div class="row-fluid">
+	<div class="span1">
+		<strong>Nombre: </strong>
+	</div>
+	<div class="span3">
+ 		<%= @card_type.name %>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span1">
+		<strong>Precio: </strong>
+	</div>
+	<div class="span3">
+	  <% if @low_price == 0 %>
+	    Not saled
+	  <% else %>
+ 		  <%= @low_price.to_f * (@earn.to_f + @george.to_f - 1) %>
+ 		<% end%>
+	</div>
+</div>
 
-  <%= form_for @bid, :url => {:controller => 'bids', :action => 'create'} do |f| %>
-    Your bid: <%= f.number_field :value%></br>
-    <%= f.submit :Bid %>
-  <% end %>
-
-<%= link_to 'Añadir Tipo de Carta', new_card_type_path %>
-
-<%= link_to 'Inicio', controller: "welcome" %>
+<%= form_for @bid, :url => {:controller => 'bids', :action => 'create', :class => "btn"} do |f| %>
+  <div class="row-fluid">
+	  <div class="span1">
+		<strong> Tu puja: </strong>
+	</div>
+	<div class="span3">
+	  <%= f.number_field :value%></br>
+	</div>
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit "Pujar", :class => "btn btn-warning" %>
+    </div>
+  </div>
+<% end %>
+  
+  
+<br />
+<div class="row-fluid">
+  <div class="span1">
+    <%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>  
+  <div class="span1">
+  <%= link_to 'Atras', buy_path, :class => "btn" %>
+  </div>
+</div>
