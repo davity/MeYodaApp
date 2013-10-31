@@ -21,19 +21,18 @@ class CardTypesController < ApplicationController
 		@card_type = CardType.find(params[:id])
 	end
 
-	def edit
-		@card_type = CardType.find(params[:id])
-	end
+	# def edit
+	# 	@card_type = CardType.find(params[:id])
+	# end
 
-	def update
-		@card_type = CardType.find(params[:id])
-
-		if @card_type.update(params[:card_type].permit(:name, :edition))
-			redirect_to @card_type
-		else
-			render 'edit'
-		end
-	end
+	# def update
+	# 	@card_type = CardType.find(params[:id])
+	# 	if @card_type.update(params[:card_type].permit(:name, :edition))
+	# 		redirect_to @card_type
+	# 	else
+	# 		render 'edit'
+	# 	end
+	# end
 
 	def destroy
 		@card_type = CardType.find(params[:id])

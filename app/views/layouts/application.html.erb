@@ -7,22 +7,43 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container">
 	    <div class="row-fluid">
 	    	<div class="span12">
 			    <div class="navbar">
 				    <div class="navbar-inner">
-				    	 <a class="brand" href="#">MeYoda</a>
+						<%= link_to "MeYoda", root_path, :class =>"brand" %>
 					    <ul class="nav">
+					    	<li class="divider-vertical"></li>
 						    <li><%= link_to "Inicio", root_path %></li>
-						    <li><a href="#">Link</a></li>
-						    <li><a href="#">Link</a></li>
+						    <li class="divider-vertical"></li>
+						    <% if session[:user_id] %>
+								<li><%= link_to 'Mi cuenta', home_path %></li>
+								
+							<% else %>
+								<li><%= link_to 'Usuarios', users_path %></li>
+							<% end %>
+							<li class="divider-vertical"></li>
+						    <li><%= link_to 'Tipos de cartas' , card_types_path %></li>
+						    <li class="divider-vertical"></li>
+						    <li><%= link_to 'Ventas' , sales_path %></li>
+						    <li class="divider-vertical"></li>
 					    </ul>
+					    <div class="navbar-form pull-right">
+						    <% if session[:user_id] %>
+								<%= link_to 'Log Out', logout_path, method: "get", :class => "btn btn-danger" %>
+							<% else %>
+								<%= link_to 'Log In', login_path, method: "get", :class => "btn  btn-success" %>
+							<% end %>
+							<% if !session[:user_id] %>
+								<%= link_to 'Registrarse', new_user_path, method: "get", :class => "btn btn-warning" %>
+							<% end %>
+						</div>
 				    </div>
 			    </div>
 			</div>
 		</div>
-	    <div class="row-fluid">
+	    <div class="row">
 			<div class="span12 offset1">
 				<%= yield %>
 			</div>

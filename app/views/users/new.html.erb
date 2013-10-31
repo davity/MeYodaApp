@@ -1,19 +1,52 @@
-<% @page_title = "UserAuth | Signup" -%>
-<% flash.each do |name, notice| -%>
+<% @page_title = "UserAuth | Signup" %>
+<% flash.each do |name, notice| %>
   <%= content_tag :div, notice, class: name %>
-<% end -%>
+<% end %>
 <div class="Sign_Form">
-  <h1>Sign Up</h1>
-  <%= form_for @user, :url => {:controller => 'users', :action => 'create'} do |f| %>
-    <p> Username:</br> <%= f.text_field :username%> </p>
-    <p> Email:</br> <%= f.text_field :email%> </p>
-    <p> Password:</br> <%= f.password_field :password%></p>
-    <p> Password Confirmation:</br> <%= f.password_field :password_confirmation%> </p>
+  <h2>Registro</h2>
+  <%= form_for @user, :url => {:controller => 'users', :action => 'create'}, :html => {:class => "form-horizontal"} do |f| %>
+    
+    <div class="control-group">
+      <%= f.label "Nombre usuario", :class => "control-label" %>
+      <div class="controls">
+          <%= f.text_field :username%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label "Email", :class => "control-label" %>
+      <div class="controls">
+          <%= f.email_field :email%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label "Password", :class => "control-label" %>
+      <div class="controls">
+        <%= f.password_field :password%>      
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label "Confirma password", :class => "control-label" %>
+      <div class="controls">
+        <%= f.password_field :password_confirmation%>
+      </div>
+    </div>
+    
     <%= fields_for @account do |account_fields| %>
-      <p> Account number:</br><%= account_fields.text_field :number %> </p>
+      <div class="control-group">
+        <%= f.label "Numero cuenta", :class => "control-label" %>
+        <div class="controls">
+          <%= account_fields.text_field :number %>
+        </div>
+      </div>
     <% end %>
-    <%= f.submit :Signup %>
+    
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit :Signup, :class => "btn btn-success" %>
+      </div>
+    </div>
   <% end %>
+
   <% if @user.errors.any? %>
     <ul class="Signup_Errors">
     <% for message_error in @user.errors.full_messages %>
@@ -30,4 +63,8 @@
     </ul>
   <% end %>
 </div>
-<%= button_to('Atras', users_path, method: "get") %>
+<div class="row-fluid">
+  <div class="span1">
+    <%= button_to('Atras', users_path, method: "get", :class => "btn") %>
+  </div>
+</div>

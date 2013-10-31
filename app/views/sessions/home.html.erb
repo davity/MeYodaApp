@@ -1,4 +1,4 @@
-<h1><%=@user.username%>'s Home</h1>
+<h2>Cuenta de <%=@user.username%></h2>
 
 <% flash.each do |name, notice| -%>
   <%= content_tag :div, notice, class: name %>
@@ -12,7 +12,7 @@
   </ul>
 <% end %>
 <% if @user.account.errors.any? %>
-    Account error:</br>
+    Account error:<br />
     <ul class="Signup_Errors">
     <% for message_error in @user.account.errors.full_messages %>
       <li><%= message_error %></li>
@@ -20,51 +20,107 @@
     </ul>
   <% end %>
 
-<table>
-  <%= form_for @user, :url => {:controller => 'users', :action => 'update'} do |f| %>
-    <tr><th>Username: </th><th><%= f.text_field :username%></th></tr>
-    <tr><th>Email: </th><th><%= f.text_field :email%></th></tr>
-    <tr><th>Change Password: </th><th><%= f.password_field :password%></th></tr>
-    <tr><th>Password Confirmation: </th><th><%= f.password_field :password_confirmation%></th></tr>
-    <%= fields_for @user.account do |account_fields| %>
-      <tr><th>Account number: </th><th><%= account_fields.text_field :number %></th></tr>
-      <tr><th>Balance: </th><th><%= account_fields.number_field :balance%></th></tr>
-    <% end %>
-    <tr><th><%= f.submit :Update %></th><th></th></tr>
+<%= form_for @user, :url => {:controller => 'users', :action => 'update'}, :html => {:class => "form-horizontal"}  do |f| %>
+  <div class="control-group">
+    <%= f.label "Nombre usuario", :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :username%>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Email", :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :email%>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Cambiar contraseña", :class => "control-label" %>
+    <div class="controls">
+      <%= f.password_field :password%>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "Confirmar contraseña", :class => "control-label" %>
+    <div class="controls">
+      <%= f.password_field :password_confirmation%>
+    </div>
+  </div>
+  <%= fields_for @user.account do |account_fields| %>
+    <div class="control-group">
+      <%= f.label "Numero cuenta", :class => "control-label" %>
+      <div class="controls">
+        <%= account_fields.text_field :number %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label "Saldo cuenta", :class => "control-label" %>
+      <div class="controls">
+        <%= account_fields.number_field :balance%>
+      </div>
+    </div>
   <% end %>
-</table></br>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "Actualizar", :class => "btn btn-warning" %>
+      </div>
+    </div>
+<% end %>
+<hr>
 
-<%= button_to('Add Card', new_card_path, method: "get") %>
-<table>
-  <tr>
-  <% if @user.cards.any? %>
-    <th>Cards owned</th>
-    </tr>
-    <tr>
-    <% @user.cards.each do |card| %>
-      <th>
-        Card name: <%= card.card_type.name %></br>
-        Edition: <%= card.card_type.edition %></br>
-        Creation date: <%= card.card_type.created_at %></br>
-        
-        <% if card.sale %>
-          Price: <%= card.sale.starting_price %> 
-          <%= link_to "Edit", edit_sale_path(card.sale.id) %>
-          <%= link_to 'Destroy',sale_path(card.sale.id),
-                               method: :delete,
-                               data:{confirm:'Are you sure?'}%>	
-        <% else %>
-          <%= link_to 'Set price', new_sale_path(card) %>
-        <% end %></br>
-        <%= link_to 'Remove', card, method: :delete, data: { confirm: '¿Estás seguro?' } %>
-      </th>
-    <% end %>
-  <% else %>
-    You have no cards
-  <% end %>
-  </tr>
-</table></br>
+<h3>Mis cartas</h3>
+<% if @user.cards.any? %>
+  <div class="row-fluid">
+    <div class="span10">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Edición</th>
+            <th>Fecha de creación</th>
+            <th>Precio</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.cards.each do |card| %>
+            <tr>
+              <td><%= card.card_type.name %></td>
+              <td><%= card.card_type.edition %></td>
+              <td><%= card.card_type.created_at %></td>
+                <% if card.sale %>
+                  <td><%= card.sale.starting_price %></td>
+                  <td><%= link_to 'Editar', edit_sale_path(card.sale.id), :class => "btn btn-small btn-warning"  %></td>
+                  <td><%= link_to 'Quitar oferta', sale_path(card.sale.id), method: :delete, data: {confirm:'Are you sure?'}, :class => "btn btn-small btn-danger" %></td>
+                <% else %>
+                  <td></td>
+                  <td></td>
+                  <td><%= link_to 'Vender', new_sale_path(card), :class => "btn btn-small btn-warning"  %></td>
+                <% end %>
+              <td><%= link_to 'Eliminar carta', card, method: :delete, data: { confirm: '¿Estás seguro?' }, :class => "btn btn-small btn-danger" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <h4>- No posees ninguna carta -</h4>
+<% end %> 
+<div class="row-fluid">
+  <div class="span2">
+    <%= link_to 'Añadir carta', new_card_path, method: "get", :class => "btn  btn-success" %>
+  </div>
+</div>
 
- <tr><th><%= button_to('Log Out', logout_path, method: "get") %></th><th></th></tr>
- <tr><th><%= button_to('Index', root_path, method: "get") %></th><th></th></tr>
-
+<hr>
+<div class="row-fluid">
+  <div class="span1">
+    <%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>
+  <div class="span2">
+    <%= link_to 'Log Out', logout_path, method: "get", :class => "btn btn-warning" %>
+  </div>
+</div>
+<br />
+<br />

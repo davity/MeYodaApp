@@ -1,9 +1,8 @@
-<<<<<<< HEAD
-<h1>Vender una nueva carta</h1>
+<h2>Vender carta</h2>
 
-<h2>Introduce el Precio Inicial de tu carta:</h2>
+<h5>Introduce el Precio Inicial de tu carta:</h5>
 
-<%= form_for @sale, :url =>sales_path(@sale, :card_id => @card.id) do |f| %>
+<%= form_for @sale, :url => sales_path(@sale, :card_id => @card.id), :html => {:class => "form-horizontal"} do |f| %>
   
   <% if @sale.errors.any? %>
   	<div id="errorExplanation">
@@ -18,9 +17,8 @@
   	</div>
   <% end %>
 
-
   <div class="control-group">
-    <%= f.label :starting_price, :class => "control-label" %>
+    <%= f.label "Precio inicial", :class => "control-label" %>
     <div class="controls">
       <div class="input-append">
         <%= f.number_field :starting_price, :type => "number" %>
@@ -36,5 +34,5 @@
   </div>
 <% end %>
 
-<%= link_to 'Atras', sales_path, :class => "btn" %>
+<%= link_to 'Atras', home_path, :class => "btn" %>
 <%= link_to 'Inicio', root_path, :class => "btn" %>
