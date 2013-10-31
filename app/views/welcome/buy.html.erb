@@ -1,31 +1,39 @@
-<h1>Cartas cotizando</h1>
-
-<table>
-  <tr>
-    <th>Owner username</th>
-    <th>Card Name</th>
-    <th>Edition</th>
-    <th>Price</th>
-    <th></th>
-  </tr>
-  <% @card_types.each do |card_type| %>
-    <%if card_type.cards.any? %>
-    <tr>
-      <th><%= card_type.cards.first.user.username %></th>
-      <th><%= card_type.name %></th>
-      <th><%= card_type.edition %></th>
-      <th><%= card_type.cards.first.sale.starting_price * (1.10 + @george -1) %> €</th>
-      <th><%= button_to("Bid", {:controller => "bids", :action => "new", :card_type_id => card_type.id, :method => :get})%></th>
-    </tr>
-    <% end %>
-  <% end %>
-</table>
+<h2>Cartas cotizando</h2>
+<br />
 <div class="row-fluid">
-  <div class="span1"><%= link_to 'Inicio', root_path, :class => "btn" %>
+  <div class="span10">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Owner username</th>
+          <th>Card Name</th>
+          <th>Edition</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @card_types.each do |card_type| %>
+          <%if card_type.cards.any? %>
+            <tr>
+              <th><%= card_type.cards.first.user.username %></th>
+              <th><%= card_type.name %></th>
+              <th><%= card_type.edition %></th>
+              <th><%= card_type.cards.first.sale.starting_price * (1.10 + @george -1) %> €</th>
+              <th><%= link_to "Pujar", {:controller => "bids", :action => "new", :card_type_id => card_type.id, :method => :get}, :class => "btn btn-small btn-success" %></th>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <% if session[:user_id] %>
-  <div class="span2"><%= link_to 'Home', home_path, :class => "btn" %>
-  </div>
-  <% end %>
 </div>
-<%= render "sessions/logger" %>
+<hr>
+<div class="row-fluid">
+  <div class="span1">
+  <%= link_to 'Inicio', root_path, :class => "btn" %>
+  </div>
+  <div class="span2">
+    <%= link_to 'Mi Cuenta', home_path, :class => "btn" %>
+  </div>  
+</div>
