@@ -56,3 +56,5 @@ end
 # Execjs
 gem 'therubyracer'
 gem 'execjs'
+
+gem 'bootstrap_helper'
