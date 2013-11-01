@@ -10,10 +10,13 @@ group :development, :test do
    gem 'sqlite3'
 end
 
+gem 'pg'
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
+
+gem "compass-rails"
+gem 'bootstrap-sass'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -57,4 +60,4 @@ end
 gem 'therubyracer'
 gem 'execjs'
 
-gem 'bootstrap_helper'
+# gem 'bootstrap_helper'
